@@ -47,6 +47,7 @@ export class Results extends Component {
         this.highScore.string = 'High Score: ' + this.maxScore;
 
         this.resultEnd.node.active = true
+        this.highScore.node.active = true;
     }
 
     hideResults(){

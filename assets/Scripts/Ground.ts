@@ -18,11 +18,11 @@ export class Ground extends Component {
     })
     public ground2: Node;
 
-    @property({
-        type: Node,
-        tooltip: 'Ground 3 is here'
-    })
-    public ground3: Node;
+    // @property({
+    //     type: Node,
+    //     tooltip: 'Ground 3 is here'
+    // })
+    // public ground3: Node;
     
 
     //Create ground width variables
@@ -32,10 +32,10 @@ export class Ground extends Component {
 
     public tempStartLocation1 = new Vec3;
     public tempStartLocation2 = new Vec3;
-    public tempStartLocation3 = new Vec3;
+    // public tempStartLocation3 = new Vec3;
 
     public gameCrtlSpeed = new GameCtrl;
-    public gameSpeed: number ;
+    public gameSpeed: number = 100;
 
     onLoad(){
         this.startUp();
@@ -44,18 +44,15 @@ export class Ground extends Component {
     startUp() {
         this.groundWidth1 = this.ground1.getComponent(UITransform).width;
         this.groundWidth2 = this.ground2.getComponent(UITransform).width;
-        this.groundWidth3 = this.ground3.getComponent(UITransform).width;
+        // this.groundWidth3 = this.ground3.getComponent(UITransform).width;
 
         this.tempStartLocation1.x = 0;
         this.tempStartLocation2.x = this.groundWidth1;
-        this.tempStartLocation3.x = this.groundWidth1 + this.groundWidth2;
+        // this.tempStartLocation3.x = this.groundWidth1 + this.groundWidth2;
 
         this.ground1.setPosition(this.tempStartLocation1);
         this.ground2.setPosition(this.tempStartLocation2);
-        this.ground3.setPosition(this.tempStartLocation3);
-
-        
-
+        // this.ground3.setPosition(this.tempStartLocation3);
 
     }
 
@@ -65,38 +62,38 @@ export class Ground extends Component {
 
     update(deltaTime: number) {
 
-        this.gameSpeed = this.gameCrtlSpeed.speed
+        // this.gameSpeed = this.gameCrtlSpeed.speed
         
         this.tempStartLocation1 = this.ground1.position ;
         this.tempStartLocation2 = this.ground2.position ;
-        this.tempStartLocation3 = this.ground3.position ;
-
+        // this.tempStartLocation3 = this.ground3.position ;
 
         //get speed and substact from x
         this.tempStartLocation1.x -= this.gameSpeed*deltaTime;
         this.tempStartLocation2.x -= this.gameSpeed*deltaTime;
-        this.tempStartLocation3.x -= this.gameSpeed*deltaTime;
+        // this.tempStartLocation3.x -= this.gameSpeed*deltaTime;
 
         const scene = director.getScene();
         const canvas = scene.getComponentInChildren(Canvas)
 
         if(this.tempStartLocation1.x <= (0-this.groundWidth1)){
-            this.tempStartLocation1.x = canvas.getComponent(UITransform).width
+            this.tempStartLocation1.x = this.tempStartLocation2.x + 1800
 
         }
         if(this.tempStartLocation2.x <= (0-this.groundWidth2)){
-            this.tempStartLocation2.x = canvas.getComponent(UITransform).width
+            this.tempStartLocation2.x = this.tempStartLocation1.x + 1800
             
         }
-        if(this.tempStartLocation3.x <= (0-this.groundWidth3)){
-            this.tempStartLocation3.x = canvas.getComponent(UITransform).width
+        // if(this.tempStartLocation3.x <= (0-this.groundWidth3)){
+        //     this.tempStartLocation3.x = canvas.getComponent(UITransform).width/2 + this.tempStartLocation2.x
             
-        }
+        // }
 
         this.ground1.setPosition(this.tempStartLocation1);
         this.ground2.setPosition(this.tempStartLocation2);
-        this.ground3.setPosition(this.tempStartLocation3);
-        
+        // this.ground3.setPosition(this.tempStartLocation3);
+
+       
     }
 }
 
